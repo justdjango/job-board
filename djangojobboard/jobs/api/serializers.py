@@ -12,3 +12,4 @@ class JobSerializer(ModelSerializer):
             "salary",
             "date_created",
         )
+        read_only_fields = ("date_created",)
