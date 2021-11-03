@@ -13,6 +13,9 @@ class JobListView(ListAPIView):
 class JobCreateView(CreateAPIView):
     serializer_class = JobSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class JobUpdateView(UpdateAPIView):
     serializer_class = JobSerializer
