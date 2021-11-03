@@ -9,6 +9,7 @@ class Job(models.Model):
     salary = models.PositiveIntegerField()
 
     date_created = models.DateTimeField(auto_now_add=True)
+    available = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.title
