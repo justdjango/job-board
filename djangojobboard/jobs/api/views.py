@@ -26,6 +26,7 @@ class JobCreateView(CreateAPIView):
 
 
 class JobDetailView(RetrieveAPIView):
+    permission_classes = [AllowAny]
     serializer_class = JobSerializer
 
     def get_queryset(self):

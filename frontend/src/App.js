@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import { JobList } from './components/JobList'
-
+import { JobDetail } from './components/JobDetail'
 
 export default function App() {
   return (
@@ -31,7 +31,8 @@ export default function App() {
         <Routes>
           <Route path="/about" element={<About/>} />
           <Route path="/users" element={<Users />} />
-          <Route path="/" element={<JobList />} />
+          <Route path="/jobs/:id" element={<JobDetail />} />
+          <Route path="/" element={<JobList />} exact />
         </Routes>
       </div>
     </Router>
