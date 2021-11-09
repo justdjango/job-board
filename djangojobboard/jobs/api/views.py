@@ -7,9 +7,11 @@ from rest_framework.generics import (
 )
 from djangojobboard.jobs.models import Job
 from .serializers import JobSerializer
+from rest_framework.permissions import AllowAny
 
 
 class JobListView(ListAPIView):
+    permission_classes = [AllowAny]
     serializer_class = JobSerializer
 
     def get_queryset(self):
