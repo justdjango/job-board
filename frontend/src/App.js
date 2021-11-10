@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { JobList } from './components/JobList'
 import { JobDetail } from './components/JobDetail'
+import { JobCreate } from './components/JobCreate'
 
 export default function App() {
   return (
@@ -23,6 +24,9 @@ export default function App() {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/create-job">Add a Job</Link>
+            </li>
           </ul>
         </nav>
 
@@ -32,6 +36,7 @@ export default function App() {
           <Route path="/about" element={<About/>} />
           <Route path="/users" element={<Users />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
+          <Route path="/create-job" element={<JobCreate />} exact />
           <Route path="/" element={<JobList />} exact />
         </Routes>
       </div>
