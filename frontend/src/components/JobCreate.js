@@ -1,15 +1,21 @@
+import { useContext, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import axios from "axios"
 import { API } from '../api'
-import { useState } from 'react';
+import { AuthContext } from "../contexts/AuthContext";
 
 export function JobCreate() {
     const [loading, setLoading] = useState(false)
+    const { user: { token } } = useContext(AuthContext)
     
     function handleSubmit(values) {
         console.log(values)
         setLoading(true)
-        axios.post(API.jobs.create, values)
+        axios.post(API.jobs.create, values, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
             .then(res => {
                 console.log(res.data)
             })
@@ -23,11 +29,11 @@ export function JobCreate() {
             {loading && "Loading..."}
             <Formik
                 initialValues={{
-                    title: '',
-                    company_name: '',
-                    company_website: '',
-                    location:'',
-                    salary: null
+                    title: 'Software developer',
+                    company_name: 'Facebook',
+                    company_website: 'https://facebook.com',
+                    location:'California',
+                    salary: 100000
                 }}
                 onSubmit={handleSubmit}>
 

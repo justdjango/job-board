@@ -1,11 +1,15 @@
-const baseURL = "http://127.0.0.1:8000/api"
+const baseURL = "http://127.0.0.1:8000"
+const apiURL = `${baseURL}/api`
 
 export const API = {
+    auth: {
+        login: `${baseURL}/auth-token/`
+    },
     jobs: {
-        list: `${baseURL}/jobs/`,
-        create: `${baseURL}/create-job/`,
-        retrieve: id => `${baseURL}/jobs/${id}/`,
-        update: id => `${baseURL}/jobs/${id}/update/`,
-        delete: id => `${baseURL}/jobs/${id}/delete/`,
+        list: `${apiURL}/jobs/`,
+        create: `${apiURL}/create-job/`,
+        retrieve: id => `${apiURL}/jobs/${id}/`,
+        update: id => `${apiURL}/jobs/${id}/update/`,
+        delete: id => `${apiURL}/jobs/${id}/delete/`,
     }
 }
