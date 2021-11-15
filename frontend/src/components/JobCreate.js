@@ -9,7 +9,6 @@ export function JobCreate() {
     const { user: { token } } = useContext(AuthContext)
     
     function handleSubmit(values) {
-        console.log(values)
         setLoading(true)
         axios.post(API.jobs.create, values, {
             headers: {
