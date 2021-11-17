@@ -1,9 +1,15 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 export function Navbar() {
-    const { user } = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    function handleSubmit() {
+      logout()
+      navigate('/login')
+    }
 
     return (
         <nav className="max-w-4xl mx-auto py-5 px-4 border-b border-gray-200">
@@ -19,7 +25,9 @@ export function Navbar() {
               <div className="flex items-center">
                 {user ? (
                   <li className="px-3 text-gray-600">
-                    <Link className="hover:text-blue-600" to="/logout">Logout</Link>
+                    <button className="hover:text-blue-600" onClick={handleSubmit}>
+                      Logout
+                    </button>
                   </li>
                 ) : (
                   <li className="px-3 text-gray-600">

@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { API } from '../api'
-import { authService } from '../services/authentication';
+import { AuthContext } from '../contexts/AuthContext'
 
 export function Login() {
     const [loading, setLoading] = useState(false)
+    const { login } = useContext(AuthContext)
+    const navigate = useNavigate()
     
     function handleSubmit(values) {
         setLoading(true)
         axios.post(API.auth.login, values)
-            .then(res => authService.login(res.data.token))
+            .then(res => {
+                login(res.data.token)
+                navigate('/')
+            })
             .finally(() => setLoading(false))
     }
 
