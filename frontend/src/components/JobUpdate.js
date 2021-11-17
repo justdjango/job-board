@@ -31,8 +31,6 @@ export function JobUpdate() {
         return () => null
     }, [id])
 
-    console.log(job)
-
     function handleSubmit(values) {
         setLoading(true)
         axios.put(API.jobs.update(id), values, {
@@ -41,7 +39,6 @@ export function JobUpdate() {
             }
         })
             .then(res => {
-                console.log(res.data)
                 navigate(`/jobs/${id}`)
             })
             .finally(() => {
@@ -66,30 +63,143 @@ export function JobUpdate() {
 
                     {({ errors, touched }) => (
                         <Form>
-                            <label htmlFor="title">Title</label>
-                            <Field id="title" name="title" placeholder="Software developer" />
-                            {touched.title && errors.title && <div>{errors.title}</div>}
+                            <Field name="title">
+                                {({ field, form }) => (
+                                    <label className="mt-3 block">
+                                        <span className="text-gray-700">Title</span>
+                                        <input
+                                        {...field}
+                                        type="text"
+                                        className="
+                                            mt-1
+                                            block
+                                            w-full
+                                            rounded-md
+                                            border-gray-300
+                                            shadow-sm
+                                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                        "
+                                        placeholder="Software developer"
+                                        style={
+                                            form.touched.title && form.errors.title ? (
+                                                { border: '2px solid var(--primary-red)'}
+                                            ) : null
+                                        }
+                                        />
+                                    </label>
+                                )}
+                            </Field>
 
-                            <label htmlFor="companyName">Company Name</label>
-                            <Field id="companyName" name="company_name" placeholder="Facebook" />
-                            {touched.company_name && errors.company_name && <div>{errors.company_name}</div>}
+                            <Field name="company_name">
+                                {({ field, form }) => (
+                                    <label className="mt-3 block">
+                                        <span className="text-gray-700">Company Name</span>
+                                        <input
+                                        {...field}
+                                        type="text"
+                                        className="
+                                            mt-1
+                                            block
+                                            w-full
+                                            rounded-md
+                                            border-gray-300
+                                            shadow-sm
+                                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                        "
+                                        placeholder="Facebook"
+                                        style={
+                                            form.touched.company_name && form.errors.company_name ? (
+                                                { border: '2px solid var(--primary-red)'}
+                                            ) : null
+                                        }
+                                        />
+                                    </label>
+                                )}
+                            </Field>
 
-                            <label htmlFor="companyWebsite">Company Website URL</label>
-                            <Field id="companyWebsite" name="company_website" placeholder="https://www..." />
-                            {touched.company_website && errors.company_website && <div>{errors.company_website}</div>}
-                            
-                            <label htmlFor="location">Location</label>
-                            <Field id="location" name="location" placeholder="San Diego" />
-                            {touched.location && errors.location && <div>{errors.location}</div>}
+                            <Field name="company_website">
+                                {({ field, form }) => (
+                                    <label className="mt-3 block">
+                                        <span className="text-gray-700">Company Website URL</span>
+                                        <input
+                                        {...field}
+                                        type="text"
+                                        className="
+                                            mt-1
+                                            block
+                                            w-full
+                                            rounded-md
+                                            border-gray-300
+                                            shadow-sm
+                                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                        "
+                                        placeholder="https://www..."
+                                        style={
+                                            form.touched.company_website && form.errors.company_website ? (
+                                                { border: '2px solid var(--primary-red)'}
+                                            ) : null
+                                        }
+                                        />
+                                    </label>
+                                )}
+                            </Field>
 
-                            <label htmlFor="salary">Salary</label>
-                            <Field type="number" id="salary" name="salary" />
-                            {touched.salary && errors.salary && <div>{errors.salary}</div>}
+                            <Field name="location">
+                                {({ field, form }) => (
+                                    <label className="mt-3 block">
+                                        <span className="text-gray-700">Location</span>
+                                        <input
+                                        {...field}
+                                        type="text"
+                                        className="
+                                            mt-1
+                                            block
+                                            w-full
+                                            rounded-md
+                                            border-gray-300
+                                            shadow-sm
+                                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                        "
+                                        placeholder="California"
+                                        style={
+                                            form.touched.location && form.errors.location ? (
+                                                { border: '2px solid var(--primary-red)'}
+                                            ) : null
+                                        }
+                                        />
+                                    </label>
+                                )}
+                            </Field>
 
-                            <button type="submit">Submit</button>
+                            <Field name="salary">
+                                {({ field, form }) => (
+                                    <label className="mt-3 block">
+                                        <span className="text-gray-700">Salary</span>
+                                        <input
+                                        {...field}
+                                        type="number"
+                                        className="
+                                            mt-1
+                                            block
+                                            w-full
+                                            rounded-md
+                                            border-gray-300
+                                            shadow-sm
+                                            focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                                        "
+                                        style={
+                                            form.touched.salary && form.errors.salary ? (
+                                                { border: '2px solid var(--primary-red)'}
+                                            ) : null
+                                        }
+                                        />
+                                    </label>
+                                )}
+                            </Field>
+
+                            <button type="submit" className="mt-3 bg-blue-100 rounded-md shadow-sm text-lg px-5 py-3 hover:bg-blue-200 ">Submit</button>
                         </Form>
                     )}
-
                 </Formik>
             )}
         </div>

@@ -52,7 +52,11 @@ export function JobDelete() {
             {loadingJob && "Fetching Job Details..."}
             {job && (
                 <form onSubmit={handleSubmit}>
-                    <button type="submit">Submit</button>
+                    <button 
+                        className="mt-3 bg-red-100 rounded-md shadow-sm text-lg px-5 py-3 hover:bg-red-200" 
+                        type="submit">
+                      Delete  
+                    </button>
                 </form>
             )}
         </div>

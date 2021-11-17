@@ -22,16 +22,18 @@ export default function App() {
 
           {/* A <Routes> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
-          <Routes>
-            <Route path="/about" element={<About/>} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/jobs/:id" element={<JobDetail />} exact />
-            <Route path="/jobs/:id/update" element={<JobUpdate />} exact />
-            <Route path="/jobs/:id/delete" element={<JobDelete />} exact />
-            <Route path="/create-job" element={<JobCreate />} exact />
-            <Route path="/login" element={<Login />} exact />
-            <Route path="/" element={<JobList />} exact />
-          </Routes>
+          <div className="max-w-4xl mx-auto py-5 px-4">
+            <Routes>
+              <Route path="/about" element={<About/>} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/jobs/:id" element={<JobDetail />} exact />
+              <Route path="/jobs/:id/update" element={<JobUpdate />} exact />
+              <Route path="/jobs/:id/delete" element={<JobDelete />} exact />
+              <Route path="/create-job" element={<JobCreate />} exact />
+              <Route path="/login" element={<Login />} exact />
+              <Route path="/" element={<JobList />} exact />
+            </Routes>
+          </div>
         </div>
       </AuthContextProvider>
     </Router>
