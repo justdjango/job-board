@@ -1,14 +1,19 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 import { AuthContext } from "../contexts/AuthContext";
+import { API } from "../api"
 
 export function Navbar() {
     const { user, logout } = useContext(AuthContext)
     const navigate = useNavigate()
 
     function handleSubmit() {
-      logout()
-      navigate('/login')
+      axios.post(API.auth.logout)
+        .then(res => {
+          logout()
+          navigate('/login')
+        })
     }
 
     return (
@@ -30,9 +35,14 @@ export function Navbar() {
                     </button>
                   </li>
                 ) : (
-                  <li className="px-3 text-gray-600">
+                  <div className="flex items-center">
+                    <li className="px-3 text-gray-600">
+                      <Link className="hover:text-blue-600" to="/signup">Signup</Link>
+                    </li>
+                    <li className="px-3 text-gray-600">
                       <Link className="hover:text-blue-600" to="/login">Login</Link>
-                  </li>
+                    </li>
+                  </div>
                 )}
               </div>
             </ul>

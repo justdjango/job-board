@@ -13,6 +13,8 @@ import { Login } from './components/Login'
 import { Navbar } from "./components/Navbar";
 import { JobUpdate } from "./components/JobUpdate";
 import { JobDelete } from "./components/JobDelete";
+import { Signup } from "./components/Signup";
+import { ConfirmEmail } from "./components/ConfirmEmail";
 
 function PrivateRoute({ children }) {
   const { user } = useContext(AuthContext)
@@ -37,6 +39,8 @@ export default function App() {
               <Route path="/jobs/:id/delete" element={<PrivateRoute><JobDelete /></PrivateRoute>} exact />
               <Route path="/create-job" element={<PrivateRoute><JobCreate /></PrivateRoute>} exact />
               <Route path="/login" element={<Login />} exact />
+              <Route path="/signup" element={<Signup />} exact />
+              <Route path="/accounts/confirm-email/:key" element={<ConfirmEmail />} exact />
               <Route path="/" element={<JobList />} exact />
             </Routes>
           </div>
