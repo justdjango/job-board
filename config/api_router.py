@@ -9,6 +9,7 @@ from djangojobboard.jobs.api.views import (
     JobUpdateView,
     JobDeleteView,
     JobDetailView,
+    CreatePaymentView,
 )
 
 if settings.DEBUG:
@@ -27,6 +28,7 @@ urlpatterns = [
     path("jobs/<pk>/update/", JobUpdateView.as_view()),
     path("jobs/<pk>/delete/", JobDeleteView.as_view()),
     path("create-job/", JobCreateView.as_view()),
+    path("payments/create-payment/", CreatePaymentView.as_view()),
 ]
 
 urlpatterns += router.urls
