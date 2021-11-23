@@ -12,7 +12,6 @@ export function JobDetail() {
       function fetchJob() {
         axios.get(API.jobs.retrieve(id))
           .then(res => {
-            console.log(res.data)
             setJob(res.data)
           })
       }
@@ -58,6 +57,12 @@ export function JobDetail() {
                         className="bg-blue-100 rounded-md shadow-sm text-lg px-5 py-3 hover:bg-blue-200 ">
                             Update
                         </NavLink>
+                        {!job.sponsored && (
+                            <NavLink to={`/jobs/${id}/sponsor`} 
+                            className="ml-2 bg-green-100 rounded-md shadow-sm text-lg px-5 py-3 hover:bg-green-200 ">
+                                Sponsor
+                            </NavLink>
+                        )}
                         <NavLink to={`/jobs/${id}/delete`}
                         className="ml-2 bg-red-100 rounded-md shadow-sm text-lg px-5 py-3 hover:bg-red-200 ">
                             Delete
