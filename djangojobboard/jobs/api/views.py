@@ -62,6 +62,12 @@ class JobDeleteView(DestroyAPIView):
         return Job.objects.all()
 
 
+class SponsoredJobCountView(APIView):
+    def get(self, request, *args, **kwargs):
+        job_count = Job.objects.filter(sponsored=True).count()
+        return Response({"job_count": job_count})
+
+
 class CreatePaymentView(APIView):
     def post(self, request, *args, **kwargs):
         try:
