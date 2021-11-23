@@ -11,20 +11,41 @@ const stripePromise = loadStripe('');
 
 
 export function Payment() {
+    const [clientSecret, setClientSecret] = useState("");
+    const [canSponsor, setCanSponsor] = useState(false)
     const { user: { token } } = useContext(AuthContext)
     const { id } = useParams()
-    const [clientSecret, setClientSecret] = useState("");
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        axios.post(API.payment.createPayment, {
-            job_id: id
-        }, {
-            headers: {
-                "Authorization": `Token ${token}`
+        async function createPayment() {
+            try {
+                const res = await axios.post(
+                    API.payment.createPayment, 
+                    {job_id: id}, 
+                    {headers: {"Authorization": `Token ${token}`}
+                })
+                setClientSecret(res.data.clientSecret)
+            } catch (e) {
+                console.log(e)
             }
-        })
-            .then(res => setClientSecret(res.data.clientSecret))
+        }
+
+        async function fetchSponsoredJobCount() {
+            try {
+                const res = await axios.get(
+                    API.jobs.sponsoredJobCount,
+                    {headers: {"Authorization": `Token ${token}`}
+                })
+                setCanSponsor(res.data.job_count < 3)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        createPayment()
+        fetchSponsoredJobCount()
+
     }, [token, id]);
 
     const appearance = {
@@ -37,7 +58,12 @@ export function Payment() {
     
     return (
         <div>
-            {clientSecret && (
+            {!canSponsor && (
+                <div className="text-gray-600">
+                    <p>We already have 3 sponsored posts. Please check back in a few days for an open slot.</p>
+                </div>
+            )}
+            {clientSecret && canSponsor && (
                 <Elements stripe={stripePromise} options={options}>
                     <CheckoutForm />
                 </Elements>
