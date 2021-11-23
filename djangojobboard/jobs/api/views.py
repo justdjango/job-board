@@ -28,7 +28,7 @@ class JobListView(ListAPIView):
     serializer_class = JobSerializer
 
     def get_queryset(self):
-        return Job.objects.filter(available=True)
+        return Job.objects.filter(available=True).order_by("-date_created")
 
 
 class JobCreateView(CreateAPIView):

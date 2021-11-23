@@ -5,12 +5,18 @@ import { API } from "../api"
 
 
 function JobListItem({ job }) {
-  console.log(job)
   return (
-    <div className="border border-gray-200 px-3 py-3 shadow-sm rounded-sm">
+    <div className="mt-2 border border-gray-200 px-3 py-3 shadow-sm rounded-sm">
       <div className="flex items-center justify-between">
         <NavLink to={`/jobs/${job.id}`}>
-          <h3 className="text-2xl text-gray-800 font-semibold">{job.title}</h3>
+          <h3 className="text-2xl text-gray-800 font-semibold">
+            {job.title}
+            {job.sponsored && (
+              <span className="bg-green-100 ml-2 text-sm text-green-600 px-2 py-2 rounded-md">
+                Sponsored
+              </span>
+            )}
+          </h3>
         </NavLink>
         <div className='text-gray-800'>
           Added on{" "}
@@ -42,20 +48,28 @@ function JobListItem({ job }) {
 
 export function JobList() {
   const [jobs, setJobs] = useState(null)
+  const [sponsoredJobs, setSponsoredJobs ]= useState(null)
 
   useEffect(() => {
     function fetchJobs() {
       axios.get(API.jobs.list)
         .then(res => {
-          setJobs(res.data)
+          const sponsoredJobs = res.data.filter(job => job.sponsored)
+          const restOfJobs = res.data.filter(job => !job.sponsored)
+          setJobs(restOfJobs)
+          setSponsoredJobs(sponsoredJobs)
         })
     }
     fetchJobs()
+    return () => null
   }, [])
 
   return (
     <div>
         {!jobs && "Loading..."}
+        {sponsoredJobs && sponsoredJobs.map(job => {
+          return <JobListItem key={job.id} job={job} />
+        })}
         {jobs && jobs.map(job => {
             return <JobListItem key={job.id} job={job} />
         })}
