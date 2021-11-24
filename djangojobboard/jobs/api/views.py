@@ -17,6 +17,7 @@ from rest_framework.views import APIView
 from djangojobboard.jobs.models import Job, SponsoredJobPost
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
+from .permissions import IsJobOwner
 from .serializers import JobSerializer
 
 # This is a sample test API key.
@@ -48,7 +49,7 @@ class JobDetailView(RetrieveAPIView):
 
 
 class JobUpdateView(UpdateAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, IsJobOwner]
     serializer_class = JobSerializer
 
     def get_queryset(self):
@@ -56,7 +57,7 @@ class JobUpdateView(UpdateAPIView):
 
 
 class JobDeleteView(DestroyAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, IsJobOwner]
 
     def get_queryset(self):
         return Job.objects.all()
@@ -69,6 +70,8 @@ class SponsoredJobCountView(APIView):
 
 
 class CreatePaymentView(APIView):
+    permission_classes = [IsAuthenticated, IsJobOwner]
+
     def post(self, request, *args, **kwargs):
         try:
             # Create a PaymentIntent with the order amount and currency

@@ -17,9 +17,20 @@ export function JobUpdate() {
     const { user: { token } } = useContext(AuthContext)
     
     useEffect(() => {
+        if (job && !job.is_owner) {
+            navigate('/')
+        }
+        return () => null
+    })
+
+    useEffect(() => {
         setLoadingJob(true)
         function fetchJob() {
-            axios.get(API.jobs.retrieve(id))
+            axios.get(API.jobs.retrieve(id), {
+                headers: {
+                    "Authorization": `Token ${token}`
+                }
+            })
                 .then(res => {
                     setJob(res.data)
                 })
@@ -29,7 +40,7 @@ export function JobUpdate() {
         }
         fetchJob()
         return () => null
-    }, [id])
+    }, [id, token])
 
     function handleSubmit(values) {
         setLoading(true)

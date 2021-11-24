@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { NavLink } from "react-router-dom"
 import { API } from "../api"
+import { AuthContext } from "../contexts/AuthContext"
 
 
 function JobListItem({ job }) {
@@ -49,10 +50,15 @@ function JobListItem({ job }) {
 export function JobList() {
   const [jobs, setJobs] = useState(null)
   const [sponsoredJobs, setSponsoredJobs ]= useState(null)
+  const { user: { token } } = useContext(AuthContext)
 
   useEffect(() => {
     function fetchJobs() {
-      axios.get(API.jobs.list)
+      axios.get(API.jobs.list, {
+          headers: {
+              "Authorization": `Token ${token}`
+          }
+      })
         .then(res => {
           const sponsoredJobs = res.data.filter(job => job.sponsored)
           const restOfJobs = res.data.filter(job => !job.sponsored)
