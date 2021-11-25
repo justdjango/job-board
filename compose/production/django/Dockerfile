@@ -82,4 +82,4 @@ COPY . ${APP_HOME}
 
 EXPOSE 80
 
-CMD ["sh", "./runserver.sh"]
+CMD ["sh", "./compose/production/django/runserver.sh"]
