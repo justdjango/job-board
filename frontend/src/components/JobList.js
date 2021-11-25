@@ -55,7 +55,11 @@ function JobListItem({ job }) {
 export function JobList() {
   const [jobs, setJobs] = useState(null)
   const [sponsoredJobs, setSponsoredJobs ]= useState(null)
-  const { user: { token } } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
+  let token = ""
+  if (user) {
+    token = user.token
+  }
 
   useEffect(() => {
     function fetchJobs() {

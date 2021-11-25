@@ -8,14 +8,18 @@ import { API } from "../api"
 import { AuthContext } from "../contexts/AuthContext"
 import { CheckoutForm } from './CheckoutForm'
 
-const stripePromise = loadStripe('');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 
 export function Payment() {
     const [job, setJob] = useState(null)
     const [clientSecret, setClientSecret] = useState("");
     const [canSponsor, setCanSponsor] = useState(false)
-    const { user: { token } } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    let token = ""
+    if (user) {
+        token = user.token
+    }
     const navigate = useNavigate()
     const { id } = useParams()
 

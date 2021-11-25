@@ -13,7 +13,11 @@ export function JobDelete() {
     const [job, setJob] = useState(null)
     const { id } = useParams()
 
-    const { user: { token } } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    let token = ""
+    if (user) {
+        token = user.token
+    }
 
     useEffect(() => {
         if (job && !job.is_owner) {

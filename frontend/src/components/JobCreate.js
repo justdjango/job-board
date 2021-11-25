@@ -30,7 +30,11 @@ export function JobCreate() {
     const [loading, setLoading] = useState(false)
     const [file, setFile] = useState(null)
     const navigate = useNavigate()
-    const { user: { token } } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    let token = ""
+    if (user) {
+        token = user.token
+    }
     
     function handleSubmit(values) {
         setLoading(true)

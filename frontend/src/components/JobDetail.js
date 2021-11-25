@@ -8,7 +8,11 @@ import { AuthContext } from "../contexts/AuthContext"
 export function JobDetail() {
     const [job, setJob] = useState(null)
     const { id } = useParams()
-    const { user: { token } } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    let token = ""
+    if (user) {
+        token = user.token
+    }
 
     useEffect(() => {
       function fetchJob() {
