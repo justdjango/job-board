@@ -207,4 +207,5 @@ sentry_sdk.init(
 FRONTEND_URL = "https://jobs.justdjango.com"
 CORS_ALLOWED_ORIGINS = [
     "https://jobs.justdjango.com",
+    "https://relaxed-mayer-8b670c.netlify.app",
 ]
