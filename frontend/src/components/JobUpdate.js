@@ -68,7 +68,9 @@ export function JobUpdate() {
                         company_name: job.company_name,
                         company_website: job.company_website,
                         location: job.location,
-                        salary: job.salary
+                        salary: job.salary,
+                        available: true,
+                        remote: false,
                     }}
                     onSubmit={handleSubmit}>
 
@@ -205,6 +207,68 @@ export function JobUpdate() {
                                         }
                                         />
                                     </label>
+                                )}
+                            </Field>
+
+                            <Field name="available">
+                                {({ field, form }) => (
+                                    <div class="block">
+                                        <div class="mt-2">
+                                            <div>
+                                                <label class="inline-flex items-center">
+                                                    <input
+                                                    {...field}
+                                                    type="checkbox"
+                                                    class="
+                                                    rounded
+                                                    bg-gray-200
+                                                    border-transparent
+                                                    focus:border-transparent focus:bg-blue-200
+                                                    text-blue-700
+                                                    focus:ring-1 focus:ring-offset-2 focus:ring-blue-500
+                                                    "
+                                                    style={
+                                                        form.touched.available && form.errors.available ? (
+                                                            { border: '2px solid var(--primary-red)'}
+                                                        ) : null
+                                                    }
+                                                    />
+                                                    <span class="ml-2">Available</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </Field>
+
+                            <Field name="remote">
+                                {({ field, form }) => (
+                                    <div class="block">
+                                        <div class="mt-2">
+                                            <div>
+                                                <label class="inline-flex items-center">
+                                                    <input
+                                                    {...field}
+                                                    type="checkbox"
+                                                    class="
+                                                    rounded
+                                                    bg-gray-200
+                                                    border-transparent
+                                                    focus:border-transparent focus:bg-blue-200
+                                                    text-blue-700
+                                                    focus:ring-1 focus:ring-offset-2 focus:ring-blue-500
+                                                    "
+                                                    style={
+                                                        form.touched.remote && form.errors.remote ? (
+                                                            { border: '2px solid var(--primary-red)'}
+                                                        ) : null
+                                                    }
+                                                    />
+                                                    <span class="ml-2">Remote</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
                             </Field>
 

@@ -31,12 +31,17 @@ export function JobDetail() {
                 <div>
                     <div className="border border-gray-200 px-3 py-3 shadow-sm rounded-sm">
                         <div className="flex items-center justify-between">
-                            <NavLink to={`/jobs/${job.id}`}>
-                            <h3 className="text-2xl text-gray-800 font-semibold">{job.title}</h3>
-                            </NavLink>
+                            <div className="flex items-center">
+                                {job.company_logo && (
+                                    <img src={job.company_logo} className="h-20 w-20 px-3 py-3" alt={job.company_name} />
+                                )}
+                                <NavLink to={`/jobs/${job.id}`}>
+                                    <h3 className="text-2xl text-gray-800 font-semibold">{job.title}</h3>
+                                </NavLink>
+                            </div>
                             <div className='text-gray-800'>
-                            Added on{" "}
-                            {new Date(job.date_created).toDateString()}
+                                Added on{" "}
+                                {new Date(job.date_created).toDateString()}
                             </div>
                         </div>
                         <p className="mt-1 text-lg text-gray-600">${job.salary}</p>
