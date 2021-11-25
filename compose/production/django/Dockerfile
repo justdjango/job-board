@@ -38,7 +38,7 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 WORKDIR ${APP_HOME}
 
 RUN addgroup --system django \
-    && adduser --system --ingroup django django
+  && adduser --system --ingroup django django
 
 
 # Install required system dependencies
@@ -78,4 +78,8 @@ RUN chown django:django ${APP_HOME}
 
 USER django
 
-ENTRYPOINT ["/entrypoint"]
+COPY . ${APP_HOME}
+
+EXPOSE 80
+
+CMD ["sh", "./runserver.sh"]
