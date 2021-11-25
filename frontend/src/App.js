@@ -46,7 +46,7 @@ export default function App() {
               <Route path="/signup" element={<Signup />} exact />
               <Route path="/payment/success" element={<Success />} exact />
               <Route path="/accounts/confirm-email/:key" element={<ConfirmEmail />} exact />
-              <Route path="/" element={<JobList />} exact />
+              <Route path="/" element={<PrivateRoute><JobList /></PrivateRoute>} exact />
             </Routes>
           </div>
         </div>

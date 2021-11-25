@@ -9,21 +9,23 @@ export function JobDetail() {
     const [job, setJob] = useState(null)
     const { id } = useParams()
     const { user } = useContext(AuthContext)
-    let token = ""
+    let token = null
     if (user) {
         token = user.token
     }
 
     useEffect(() => {
       function fetchJob() {
-        axios.get(API.jobs.retrieve(id), {
-            headers: {
-                "Authorization": `Token ${token}`
-            }
-        })
-          .then(res => {
-            setJob(res.data)
-          })
+        if (token) {
+            axios.get(API.jobs.retrieve(id), {
+                headers: {
+                    "Authorization": `Token ${token}`
+                }
+            })
+            .then(res => {
+                setJob(res.data)
+            })
+        }
       }
       fetchJob()
     }, [id, token])

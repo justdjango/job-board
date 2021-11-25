@@ -56,24 +56,26 @@ export function JobList() {
   const [jobs, setJobs] = useState(null)
   const [sponsoredJobs, setSponsoredJobs ]= useState(null)
   const { user } = useContext(AuthContext)
-  let token = ""
+  let token = null
   if (user) {
     token = user.token
   }
 
   useEffect(() => {
     function fetchJobs() {
-      axios.get(API.jobs.list, {
-          headers: {
-              "Authorization": `Token ${token}`
-          }
-      })
-        .then(res => {
-          const sponsoredJobs = res.data.filter(job => job.sponsored)
-          const restOfJobs = res.data.filter(job => !job.sponsored)
-          setJobs(restOfJobs)
-          setSponsoredJobs(sponsoredJobs)
+      if (token) {
+        axios.get(API.jobs.list, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
         })
+          .then(res => {
+            const sponsoredJobs = res.data.filter(job => job.sponsored)
+            const restOfJobs = res.data.filter(job => !job.sponsored)
+            setJobs(restOfJobs)
+            setSponsoredJobs(sponsoredJobs)
+          })
+      }
     }
     fetchJobs()
     return () => null
