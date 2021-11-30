@@ -1,11 +1,12 @@
 const debug = process.env.NODE_ENV !== "production"
 
 let baseURL = "https://django-jobs.caprover.justdjango.com"
-const apiURL = `${baseURL}/api`
 
 if (debug) {
     baseURL = "http://127.0.0.1:8000"
 }
+
+const apiURL = `${baseURL}/api`
 
 export const API = {
     auth: {

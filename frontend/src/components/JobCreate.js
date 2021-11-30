@@ -39,7 +39,9 @@ export function JobCreate() {
     function handleSubmit(values) {
         setLoading(true)
         const data = new FormData()
-        data.append('company_logo', file)
+        if (file) {
+            data.append('company_logo', file)
+        }
         data.append('title', values.title)
         data.append('company_name', values.company_name)
         data.append('company_website', values.company_website)
